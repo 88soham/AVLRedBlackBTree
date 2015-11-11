@@ -1,0 +1,50 @@
+lin309-03:4% make
+g++ main_AVL_insert_search.cpp -o AVL
+./AVL
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVL=1.190000
+
+Time for Searching in AVL=1.000000
+g++ main_AVL_insert_search_hash.cpp -o AVLhash
+./AVLhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVLhash=1.090000
+
+Time for Searching in AVLhash=0.900000
+g++ main_RB_insert_search.cpp -o BTREE
+./BTREE
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RB=1.680000
+
+Time for Searching in RB=1.410000
+g++ main_RB_insert_search_hash.cpp -o BTREEhash
+./BTREEhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.510000
+
+Time for Searching in RBhash=1.250000
+g++ main_Btree_insert_search.cpp -o BTREE
+./BTREE
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREE=1.050000
+
+Time for Searching in BTREE=0.230000
+g++ main_Btree_insert_search_hash.cpp -o BTREEhash
+./BTREEhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=0.930000
+
+Time for Searching in BTREEhash=0.340000
+

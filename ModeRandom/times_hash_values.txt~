@@ -1,0 +1,101 @@
+Time for Insertion in AVL=1.280000
+Time for Searching in AVL=1.090000
+
+[3]
+Time for Insertion in AVLhash=1.270000
+Time for Searching in AVLhash=1.080000
+
+[11]
+Time for Insertion in AVLhash=1.230000
+Time for Searching in AVLhash=1.040000
+
+[101]
+Time for Insertion in AVLhash=1.150000
+Time for Searching in AVLhash=0.990000
+
+
+
+==================================================================================================
+
+
+
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_RB_insert_search.cpp
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RB=1.740000
+
+Time for Searching in RB=1.550000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_RB_insert_search_hash.cpp	[3]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.660000
+
+Time for Searching in RBhash=1.490000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_RB_insert_search_hash.cpp	[11]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.630000
+
+Time for Searching in RBhash=1.440000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_RB_insert_search_hash.cpp	[101]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.520000
+
+Time for Searching in RBhash=1.390000
+
+
+
+================================================================================================
+
+
+
+
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_Btree_insert_search_updated1.cpp
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREE=1.480000
+
+Time for Searching in BTREE=1.180000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_Btree_insert_search_hash_updated1.cpp	[3]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=1.480000
+
+Time for Searching in BTREEhash=1.170000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_Btree_insert_search_hash_updated1.cpp	[11]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=1.450000
+
+Time for Searching in BTREEhash=1.130000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ g++ main_Btree_insert_search_hash_updated1.cpp	[101]
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=1.350000
+
+Time for Searching in BTREEhash=1.020000
+soham@ubuntu:~/Desktop/ADS_project_new/ModeRandom$ 
+
+
+
+
+
+
+

@@ -1,0 +1,378 @@
+#include <iostream>
+#include <stdlib.h>
+#include<stdio.h>
+#include<math.h>
+
+#define ORDER 3
+
+using namespace std;
+
+typedef struct BtreeNode
+{
+	//one extre key,value and child_ptr kept for the split-case
+	int keys[ORDER];
+	int values[ORDER];
+	struct BtreeNode *child_ptrs[ORDER+1];
+	struct BtreeNode *parent_ptr;
+	struct BtreeNode *left_sibling_ptr;
+	struct BtreeNode *rt_sibling_ptr;
+	int no_of_keys_in_node;
+}BtreeNode;
+
+int bin_search(BtreeNode* root, int key); 
+void shift_insert_in_pos(BtreeNode *root,int pos,int value,int key);
+void intitialize_node(BtreeNode *myBtreeNode);
+
+class Btree
+{
+	private:
+		BtreeNode *root;
+	public:
+		Btree();
+		void create_root(BtreeNode *btree);
+		int search(BtreeNode *root,int key);	//returns the corresponding value
+		static BtreeNode* insert(BtreeNode *root,int key,int value);
+		void display_sorted(BtreeNode *root);
+		void display_level(BtreeNode *root);
+};
+
+
+Btree:: Btree()
+{
+	root=NULL;
+}
+
+void Btree::create_root (BtreeNode *btree)
+{
+	//initializations done in main
+	root=btree;
+}
+
+
+void Btree::display_level(BtreeNode *root)
+{
+	int i;
+	BtreeNode *temp_root;
+	while(root!=NULL)
+	{
+		temp_root=root;
+		while(1)
+		{
+			printf("[");
+			for(i=0;i<(ORDER-1);i++)
+				printf("%d ",temp_root->keys[i]);
+			printf("]\t");
+			temp_root=temp_root->rt_sibling_ptr;
+			if(temp_root==NULL)
+				break;
+		}
+		printf("\n");
+		root=root->child_ptrs[0];
+	}	
+}
+
+void Btree::display_sorted(BtreeNode *root)
+{
+	int i;
+	BtreeNode *temp_root;
+
+	if(root->child_ptrs[0]==NULL)	//reached a leaf-node
+	{//print all keys
+		for(i=0;i<(ORDER-1) && root->keys[i]!=-1;i++)
+			printf("%d ",root->keys[i]);
+		return;
+	}
+
+	for(i=0;i<ORDER;i++)
+	{
+		if(root->child_ptrs[i]!=NULL)	
+			display_sorted(root->child_ptrs[i]);
+		if(root->keys[i]!=-1)
+			printf("%d ",root->keys[i]);
+	}		
+}
+
+
+int Btree::search(BtreeNode *root,int key)
+{
+	//search root and follow pointers down accordingly
+	int i,value=-1;
+	if(root==NULL)	//NOT FOUND
+	{
+		//printf("\nNULL");
+		return value;
+	}
+	for(i=0;i<(ORDER);i++)
+	{
+		//printf("\ni=%d",i);
+		if(root->keys[i]==key)
+		{
+			value=root->values[i];
+			break;
+		}
+		if(root->keys[i]>key || root->keys[i]==-1)
+		{
+			value=search(root->child_ptrs[i],key);
+			//printf("\nMoving down child");
+			break;
+		}
+	}
+	return value;
+}
+
+
+BtreeNode* Btree::insert(BtreeNode *root,int key,int value)
+{
+	int i,j,pos,split_key,split_value;
+	BtreeNode *left_new,*rt_new,*parent,*root_new,*temp_root;
+	
+	temp_root=root;
+	//printf("[INSERTING key %d] ",key);
+
+	if(temp_root->child_ptrs[0]!=NULL)		//haven't reached a leaf node, follow ptrs down to a leaf node
+	{
+		//search for the correct position 	
+		//binary search
+		while(temp_root->child_ptrs[0]!=NULL)	//move to leaf node
+		{
+			pos=bin_search(temp_root,key);
+			//printf(" [pos=%d] ",pos);
+			temp_root=temp_root->child_ptrs[pos];
+			//printf(" [Moved down to node with keys %d,%d] ",temp_root->keys[0],temp_root->keys[1]);
+			//printf(" [parent with keys %d,%d] ",temp_root->parent_ptr->keys[0],temp_root->parent_ptr->keys[1]);
+		}
+	}
+
+	//reached a leaf node, insert the pair
+	//printf("[Reached leaf] ");
+
+	//search for the correct position 	
+	//binary search
+	pos=bin_search(temp_root,key);
+	//printf(" [pos=%d] ",pos);
+	//this is the insertion in a leaf node- all child-ptrs NULL, so no adjustment reqd 
+	shift_insert_in_pos(temp_root,pos,value,key);	
+	//printf(" [j=%d] ",j);	
+	temp_root->no_of_keys_in_node++;
+
+	//if node has become full now
+	//if(temp_root->no_of_keys_in_node==(ORDER-1))
+	//{
+	//	printf(" [Node full after inserting %d] ",key);
+	//}
+
+
+	//if the node has exceeded its capacity, split it and move up the tree following parent pointers
+	if(temp_root->no_of_keys_in_node==ORDER) 
+	{
+		while(1)
+		{
+			//split the node and form the left_new and rt_new nodes
+			BtreeNode* left_new=new BtreeNode;
+			intitialize_node(left_new);
+
+			BtreeNode* rt_new=new BtreeNode;
+			intitialize_node(rt_new);
+
+			//printf(" [Node is being split] ");
+			
+			//keys copied
+			for(i=0;i<(int)(floor(ORDER/2));i++)
+			{
+				left_new->keys[i]=temp_root->keys[i];
+				left_new->values[i]=temp_root->values[i];
+			}
+			left_new->no_of_keys_in_node=(int)(floor(ORDER/2));
+
+			split_key=temp_root->keys[(int)(floor(ORDER/2))];
+			split_value=temp_root->values[(int)(floor(ORDER/2))];	
+			//printf(" [split-key=%d] ",split_key);
+
+			for(i=(int)(floor(ORDER/2))+1;i<=ORDER-1;i++)
+			{
+				rt_new->keys[i-((int)(floor(ORDER/2))+1)]=temp_root->keys[i];
+				rt_new->values[i-((int)(floor(ORDER/2))+1)]=temp_root->values[i];
+			}
+			rt_new->no_of_keys_in_node=(int)(floor((ORDER-1)/2));			
+	
+			//child ptrs copied as well, child's parent ptrs should also be updated
+			for(i=0;i<=(int)(floor(ORDER/2));i++)
+			{
+				left_new->child_ptrs[i]=temp_root->child_ptrs[i];
+				if(temp_root->child_ptrs[i]!=NULL)
+					temp_root->child_ptrs[i]->parent_ptr=left_new;
+				//if(left_new->child_ptrs[i]!=NULL)
+				//	printf(" ltkeys[0]=%d,ltkeys[1]=%d ",left_new->child_ptrs[i]->keys[0],left_new->child_ptrs[i]->keys[1]);
+			}
+			for(i=(int)(floor(ORDER/2))+1;i<=ORDER;i++)
+			{
+				rt_new->child_ptrs[i-((int)(floor(ORDER/2))+1)]=temp_root->child_ptrs[i];
+				if(temp_root->child_ptrs[i]!=NULL)
+					temp_root->child_ptrs[i]->parent_ptr=rt_new;
+				//if(rt_new->child_ptrs[i-((int)(floor(ORDER/2))+1)]!=NULL)
+				//	printf(" rtkeys[0]=%d,rtkeys[1]=%d ",rt_new->child_ptrs[i-((int)(floor(ORDER/2))+1)]->keys[0],rt_new->child_ptrs[i-((int)(floor(ORDER/2))+1)]->keys[1]);
+			}
+			
+			//sibling ptrs updates
+			if(temp_root->left_sibling_ptr!=NULL)
+				temp_root->left_sibling_ptr->rt_sibling_ptr=left_new;
+			if(temp_root->rt_sibling_ptr!=NULL)
+				temp_root->rt_sibling_ptr->left_sibling_ptr=rt_new;			
+			left_new->left_sibling_ptr=temp_root->left_sibling_ptr;
+			rt_new->rt_sibling_ptr=temp_root->rt_sibling_ptr;
+			left_new->rt_sibling_ptr=rt_new;			
+			rt_new->left_sibling_ptr=left_new;
+			
+
+			parent=temp_root->parent_ptr;
+			//if(parent!=NULL)
+			//	printf(" [parent:%d,%d] ",parent->keys[0],parent->keys[1]);
+
+			if(parent==NULL)	//in root
+			{
+				//create new root with split_key and split_value and set the ptrs
+				BtreeNode* root_new=new BtreeNode;
+				intitialize_node(root_new);
+
+				//split key copied
+				root_new->keys[0]=split_key;
+				root_new->values[0]=split_value;
+	
+				//child ptrs updates
+				root_new->child_ptrs[0]=left_new;
+				root_new->child_ptrs[1]=rt_new;	
+
+				root_new->no_of_keys_in_node=1;
+				
+				//parent ptr updates
+				left_new->parent_ptr=root_new;
+				rt_new->parent_ptr=root_new;
+
+
+				//sibling ptr updates
+				//NULL
+
+				//printf(" [new nodes have parent with keys %d,%d] ",left_new->parent_ptr->keys[0],left_new->parent_ptr->keys[1]);
+
+				//printf(" [New root formed] ",key);
+
+				//************root UPDATED***********
+				root=root_new;
+		
+				//DONE
+				break;
+			}
+
+			else		//there is a non-null parent
+			{
+				//find position
+				pos=bin_search(parent,split_key);
+				//printf(" [pos=%d] ",pos);
+				shift_insert_in_pos(parent,pos,split_value,split_key);	
+				//printf(" [j=%d] ",j);
+
+				//insert the child ptrs to the newly created nodes
+				parent->child_ptrs[pos]=left_new;
+				parent->child_ptrs[pos+1]=rt_new;
+
+				left_new->parent_ptr=parent;
+				rt_new->parent_ptr=parent;
+				
+
+				parent->no_of_keys_in_node++;
+				//printf(" [no_of_keys_in_parent=%d ] ",parent->no_of_keys_in_node);
+				
+			}
+			
+
+			if(parent->no_of_keys_in_node<=(ORDER-1))		//adjustments successful, no further splits required
+			{
+				//printf(" [parent adjustment succesful] ");
+				//printf(" [parent:%d,%d] ",parent->keys[0],parent->keys[1]);
+				//DONE
+				break;
+			}
+			else
+			{
+				//printf(" [moving up] ");
+				temp_root=parent;
+			}
+		}
+	}	
+
+	return root;
+}
+
+
+
+void shift_insert_in_pos(BtreeNode *root,int pos,int value,int key)
+{
+	int i,j;
+	char flag='0';
+
+	if(root->keys[pos]==-1)
+	{
+		root->keys[pos]=key;
+		root->values[pos]=value;
+		//j=pos;	
+	}
+
+	else
+	{
+		//shift elements and insert
+		for(i=ORDER-2;i>=pos;i--)
+		{
+			root->keys[i+1]=root->keys[i];
+			root->values[i+1]=root->values[i];
+
+			/*if(root->keys[i+1]!=-1 && flag=='0')
+			{
+				flag='1';
+				j=i+1;
+			}*/
+		}
+	
+		root->keys[pos]=key;
+		root->values[pos]=value;
+	}
+
+	//shift child-pointers on the rt of pos to make space for left_new and rt_new
+	for(i=ORDER-1;i>pos;i--)
+		root->child_ptrs[i+1]=root->child_ptrs[i];	//child_ptr[pos] is no more
+							
+	//return j;	//j is the last non -1 valued index after insertion
+}
+
+
+int bin_search(BtreeNode* root, int key)
+{
+	int i;
+	//printf(" [nodes scanned in bin_search ");
+	for(i=0;i<(ORDER);i++)
+	{
+		if(root->keys[i]>key || root->keys[i]==-1)
+			break;
+		//printf("%d ",root->keys[i]);
+	}
+	//printf("]");
+	return i;
+}	
+
+void intitialize_node(BtreeNode *myBtreeNode)
+{
+	int i;
+
+	//initiation
+	for(i=0;i<ORDER;i++)
+	{	
+		myBtreeNode->keys[i]=-1;
+		myBtreeNode->values[i]=-1;
+		myBtreeNode->child_ptrs[i]=NULL;
+	}
+	myBtreeNode->no_of_keys_in_node=0;	
+	myBtreeNode->parent_ptr=NULL;
+	myBtreeNode->left_sibling_ptr=NULL;
+	myBtreeNode->rt_sibling_ptr=NULL;
+	myBtreeNode->child_ptrs[i]=NULL;
+}
+

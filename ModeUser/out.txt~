@@ -1,0 +1,201 @@
+lin309-03:137% g++ main_AVL_insert_search_hash.cpp
+lin309-03:138% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVLhash=1.170000
+
+Time for Searching in AVLhash=0.980000
+lin309-03:139% g++ main_Btree_insert_search_hash.cpp
+lin309-03:140% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=1.050000
+
+Time for Searching in BTREEhash=0.250000
+lin309-03:141% g++ main_RB_insert_search_hash.cpp
+lin309-03:142% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.640000
+
+Time for Searching in RBhash=1.350000
+lin309-03:143% g++ main_AVL_insert_search_hash.cpp
+lin309-03:144% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVLhash=1.150000
+
+Time for Searching in AVLhash=0.950000
+lin309-03:145% g++ main_Btree_insert_search_hash.cpp
+lin309-03:146% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=1.020000
+
+Time for Searching in BTREEhash=0.290000
+lin309-03:147% g++ main_RB_insert_search_hash.cpp
+lin309-03:148% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.580000
+
+Time for Searching in RBhash=1.350000
+lin309-03:149% clear
+
+lin309-03:150% g++ main_AVL_insert_search_hash.cpp
+lin309-03:151% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVLhash=1.080000
+
+Time for Searching in AVLhash=0.900000
+lin309-03:152% g++ main_Btree_insert_search_hash.cpp
+lin309-03:153% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=0.950000
+
+Time for Searching in BTREEhash=0.340000
+lin309-03:154% g++ main_RB_insert_search_hash.cpp
+lin309-03:155% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.490000
+
+Time for Searching in RBhash=1.220000
+lin309-03:156% make
+g++ main_AVL_insert_search.cpp -o AVL
+./AVL
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVL=1.200000
+
+Time for Searching in AVL=0.990000
+g++ main_AVL_insert_search_hash.cpp -o AVLhash
+./AVLhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in AVLhash=1.090000
+
+Time for Searching in AVLhash=0.880000
+g++ main_RB_insert_search.cpp -o BTREE
+./BTREE
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RB=1.690000
+
+Time for Searching in RB=1.400000
+g++ main_RB_insert_search_hash.cpp -o BTREEhash
+./BTREEhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.490000
+
+Time for Searching in RBhash=1.230000
+g++ main_Btree_insert_search.cpp -o BTREE
+./BTREE
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREE=1.060000
+
+Time for Searching in BTREE=0.240000
+g++ main_Btree_insert_search_hash.cpp -o BTREEhash
+./BTREEhash
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=0.940000
+
+Time for Searching in BTREEhash=0.340000
+lin309-03:157% random_input_1000000.txt
+random_input_1000000.txt: Command not found.
+lin309-03:158% clear
+
+lin309-03:159% cd ..
+lin309-03:160% cd ModeUser
+lin309-03:161% make
+g++ main_AVL_insert_search.cpp -o AVL
+./AVL
+
+Please enter the input-filename:random_input_20.txt
+
+AVL tree Inorder Traversal:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+
+
+AVL tree Postorder Traversal:
+1 3 2 5 7 6 10 9 8 4 13 12 15 14 18 17 20 19 16 11 
+
+g++ main_AVL_insert_search_hash.cpp -o AVLhash
+./AVLhash
+
+Please enter the input-filename:random_input_20.txt
+
+Hashed AVL tree 0 Inorder Traversal:
+3 6 9 12 15 18 
+Hashed AVL tree 0 Postorder Traversal:
+6 3 12 18 15 9 
+
+
+Hashed AVL tree 1 Inorder Traversal:
+1 4 7 10 13 16 19 
+Hashed AVL tree 1 Postorder Traversal:
+1 7 10 4 19 16 13 
+
+
+Hashed AVL tree 2 Inorder Traversal:
+2 5 8 11 14 17 20 
+Hashed AVL tree 2 Postorder Traversal:
+2 8 5 14 20 17 11 
+
+g++ main_Btree_insert_search.cpp -o BTREE
+./BTREE
+
+Please enter the input-filename:random_input_20.txt
+Btree_level.out
+[8 -1 ]	
+[4 -1 ]	[14 -1 ]	
+[2 -1 ]	[6 -1 ]	[11 -1 ]	[16 19 ]	
+[1 -1 ]	[3 -1 ]	[5 -1 ]	[7 -1 ]	[9 10 ]	[12 13 ]	[15 -1 ]	[17 18 ]	[20 -1 ]	
+Btree_sorted.out
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 g++ main_Btree_insert_search_hash.cpp -o BTREEhash
+./BTREEhash
+
+Please enter the input-filename:random_input_20.txt
+
+Btree_level.out [bucket# 0]
+[9 15 ]	
+[3 6 ]	[12 -1 ]	[18 -1 ]	
+Btree_sorted.out [bucket# 0]
+3 6 9 12 15 18 
+
+
+Btree_level.out [bucket# 1]
+[10 -1 ]	
+[4 -1 ]	[16 -1 ]	
+[1 -1 ]	[7 -1 ]	[13 -1 ]	[19 -1 ]	
+Btree_sorted.out [bucket# 1]
+1 4 7 10 13 16 19 
+
+
+Btree_level.out [bucket# 2]
+[11 -1 ]	
+[5 -1 ]	[17 -1 ]	
+[2 -1 ]	[8 -1 ]	[14 -1 ]	[20 -1 ]	
+Btree_sorted.out [bucket# 2]
+2 5 8 11 14 17 20 
+

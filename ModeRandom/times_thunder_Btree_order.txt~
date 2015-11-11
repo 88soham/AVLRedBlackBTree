@@ -1,0 +1,35 @@
+***3***
+Time for Insertion in BTREE=1.530000
+Time for Searching in BTREE=0.610000
+
+***8***
+Time for Insertion in BTREE=1.140000
+Time for Searching in BTREE=0.270000
+
+***15***
+Time for Insertion in BTREE=1.060000
+Time for Searching in BTREE=0.240000
+
+***18***
+Time for Insertion in BTREE=1.150000
+Time for Searching in BTREE=0.240000
+
+***20***
+Time for Insertion in BTREE=1.170000
+Time for Searching in BTREE=0.320000
+
+***30***
+Time for Insertion in BTREE=1.260000
+Time for Searching in BTREE=0.290000
+
+***40***
+Time for Insertion in BTREE=1.310000
+Time for Searching in BTREE=0.400000
+
+***50***
+Time for Insertion in BTREE=1.420000
+Time for Searching in BTREE=0.310000
+
+***75***
+Time for Insertion in BTREE=1.410000
+Time for Searching in BTREE=0.300000

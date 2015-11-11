@@ -1,0 +1,46 @@
+***3***
+Time for Insertion in AVLhash=1.170000
+Time for Searching in AVLhash=0.980000
+
+Time for Insertion in BTREEhash=1.050000
+Time for Searching in BTREEhash=0.250000
+
+Time for Insertion in RBhash=1.640000
+Time for Searching in RBhash=1.350000
+
+
+***11***
+Time for Insertion in AVLhash=1.150000
+Time for Searching in AVLhash=0.950000
+
+Time for Insertion in BTREEhash=1.020000
+Time for Searching in BTREEhash=0.290000
+
+Time for Insertion in RBhash=1.580000
+Time for Searching in RBhash=1.350000
+
+
+***101***
+Time for Insertion in AVLhash=1.080000
+
+Time for Searching in AVLhash=0.900000
+lin309-03:152% g++ main_Btree_insert_search_hash.cpp
+lin309-03:153% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in BTREEhash=0.950000
+
+Time for Searching in BTREEhash=0.340000
+lin309-03:154% g++ main_RB_insert_search_hash.cpp
+lin309-03:155% ./a.out
+
+Please enter the input-filename:random_input_1000000.txt
+
+Time for Insertion in RBhash=1.490000
+
+Time for Searching in RBhash=1.220000
+lin309-03:156% 
+
+
+
